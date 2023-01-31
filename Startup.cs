@@ -1,3 +1,7 @@
+using JWTAuthentication.DTOMapping;
+using JWTAuthentication.Repository;
+using JWTAuthentication.Service;
+using JWTAuthentication.ServiceContract;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -39,7 +43,7 @@ namespace JWTAuthentication
             services.AddTransient<IUserStore<ApplicationUser>, ApplicationUserStore>();
 
 
-            services.AddIdentity<ApplicationUser, ApplicationRole>()
+     services.AddIdentity<ApplicationUser, ApplicationRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddUserStore<ApplicationUserStore>()
     .AddUserManager<ApplicationUserManager>()
@@ -49,6 +53,9 @@ namespace JWTAuthentication
     .AddDefaultTokenProviders();
             services.AddScoped<ApplicationRoleStore>();
             services.AddScoped<ApplicationUserStore>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddAutoMapper(typeof(MappingProfile));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -58,7 +65,7 @@ namespace JWTAuthentication
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -66,15 +73,15 @@ namespace JWTAuthentication
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "JWTAuthentication v1"));
             }
-
+          
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+           // app.UseAuthentication();
             app.UseAuthorization();
             IServiceScopeFactory serviceScopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
             using (IServiceScope scope = serviceScopeFactory.CreateScope())
-            {
+            {/*
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
                 // var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
                 if (!await roleManager.RoleExistsAsync(SD.S_RoleManager))
@@ -94,7 +101,7 @@ namespace JWTAuthentication
                     var role = new ApplicationRole();
                     role.Name = SD.S_RoleEmployee;
                     await roleManager.CreateAsync(role);
-                }
+                }*/
             }
 
 

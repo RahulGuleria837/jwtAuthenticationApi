@@ -1,3 +1,4 @@
+using JWTAuthentication.Model;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -15,6 +16,7 @@ namespace Web_API_JWT_Angular_1.Identity
 
     }
     public DbSet<ApplicationRole> ApplicationRoles { get; set; }
+        public DbSet<Employee> Employees { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
       base.OnModelCreating(builder);
