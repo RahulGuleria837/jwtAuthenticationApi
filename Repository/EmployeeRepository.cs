@@ -39,7 +39,7 @@ namespace JWTAuthentication.Repository
 
         public bool Save()
         {
-            return _context.SaveChanges()==1 ? true : false; 
+            return _context.SaveChanges() == 1 ? true : false;
         }
 
         public bool UpdateEmployee(Employee employee)

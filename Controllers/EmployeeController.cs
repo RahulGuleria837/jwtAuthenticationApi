@@ -12,7 +12,7 @@ namespace JWTAuthentication.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-     // [Authorize]
+    // [Authorize]
     public class EmployeeController : Controller
     {
         private readonly IEmployeeRepository _employeeRepository;
@@ -51,7 +51,7 @@ namespace JWTAuthentication.Controllers
             return Ok();
         }
 
-        [HttpDelete ("employeeId:int")]
+        [HttpDelete ("{employeeId:int}")]
         public IActionResult DeleteEmployee(int employeeId)
         {
             if (employeeId == 0) 

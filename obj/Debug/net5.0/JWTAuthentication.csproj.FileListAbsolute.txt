@@ -39,7 +39,6 @@ C:\Assignment\JWTAuthentication\bin\Debug\net5.0\Microsoft.IdentityModel.Protoco
 C:\Assignment\JWTAuthentication\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Assignment\JWTAuthentication\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
 C:\Assignment\JWTAuthentication\bin\Debug\net5.0\Microsoft.OpenApi.dll
-C:\Assignment\JWTAuthentication\bin\Debug\net5.0\Newtonsoft.Json.dll
 C:\Assignment\JWTAuthentication\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Assignment\JWTAuthentication\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Assignment\JWTAuthentication\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -70,3 +69,4 @@ C:\Assignment\JWTAuthentication\obj\Debug\net5.0\JWTAuthentication.dll
 C:\Assignment\JWTAuthentication\obj\Debug\net5.0\ref\JWTAuthentication.dll
 C:\Assignment\JWTAuthentication\obj\Debug\net5.0\JWTAuthentication.pdb
 C:\Assignment\JWTAuthentication\obj\Debug\net5.0\JWTAuthentication.genruntimeconfig.cache
+C:\Assignment\JWTAuthentication\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

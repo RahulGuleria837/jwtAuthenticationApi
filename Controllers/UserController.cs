@@ -16,7 +16,7 @@ namespace JWTAuthentication.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    
+
     public class UserController : Controller
     {
         private readonly IUserService _userService;
@@ -33,18 +33,19 @@ namespace JWTAuthentication.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginViewModel login)
         {
-            if (await _userService.IsUnique(login.UserName)) return Ok(new { Message = "Please Register first then login!!!" });
+            if (await _userService.IsUnique(login.UserName))
+                return Ok(new { Message = "Please Register first then login!!!" });
             var userAuthorize = await _userService.AuthenticateUser(login.UserName, login.Password);
             if (userAuthorize == null) return Unauthorized();
             return Ok(new { Message = "login successfully" });
         }
+        [Route("Register")]
         [HttpPost]
-        /*[Route("Register")]*/
         public async Task<IActionResult> Register([FromBody] UserRegisterDTO userRegisterDetail)
         {
 
             var ApplicationUserDetail = _mapper.Map<ApplicationUser>(userRegisterDetail);
-            ApplicationUserDetail.PasswordHash = userRegisterDetail.Password;
+            ApplicationUserDetail.PasswordHash = userRegisterDetail.Role;
             if (ApplicationUserDetail == null || !ModelState.IsValid) return BadRequest();
             if (!await _userService.IsUnique(userRegisterDetail.UserName)) return Ok(new { Message = "You are already register go to login" });
             var registerUser = await _userService.RegisterUser(ApplicationUserDetail);
