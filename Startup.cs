@@ -60,6 +60,7 @@ namespace JWTAuthentication
             services.AddScoped<ApplicationUserStore>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IJWTRepository, JWTRepository>();
             services.AddAutoMapper(typeof(MappingProfile));
             services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
 

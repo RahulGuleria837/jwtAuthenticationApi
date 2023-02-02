@@ -12,7 +12,7 @@ namespace JWTAuthentication.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    // [Authorize]
+    [Authorize]
     public class EmployeeController : Controller
     {
         private readonly IEmployeeRepository _employeeRepository;
@@ -22,12 +22,14 @@ namespace JWTAuthentication.Controllers
 
         }
         [HttpGet]
+        [Authorize(Roles = SD.RoleHr + "," + SD.RoleManager)]
         public IActionResult GetEmployees()
         {
             var employeeToList = _employeeRepository.GetEmployees().ToList();
             return Ok(employeeToList);
         }
 
+        [Authorize(Roles = SD.RoleHr)]
         [HttpGet("{employeeId:int}")]
         public IActionResult GetEmployee(int employeeId)
         {
@@ -39,6 +41,7 @@ namespace JWTAuthentication.Controllers
             }
             return Ok(employee);
         }
+        [Authorize(Roles =SD.RoleHr + "," + SD.RoleManager)]
         [HttpPost]
         public IActionResult CreateEmployee(Employee employee)
         {
@@ -50,7 +53,7 @@ namespace JWTAuthentication.Controllers
             }
             return Ok();
         }
-
+        [Authorize(Roles =SD.RoleHr + "," + SD.RoleManager)]
         [HttpDelete ("{employeeId:int}")]
         public IActionResult DeleteEmployee(int employeeId)
         {
@@ -65,6 +68,7 @@ namespace JWTAuthentication.Controllers
             return Ok(); ;
 
         }
+        [Authorize(Roles = SD.RoleHr + "," + SD.RoleManager + "," + SD.RoleEmployee)]
         [HttpPut]
         public IActionResult UpdateEmployee(Employee employee)
         {

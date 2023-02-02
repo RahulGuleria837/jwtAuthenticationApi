@@ -7,8 +7,8 @@ namespace JWTAuthentication
 {
     public class SD
     {
-        public static string S_RoleManager = "Manager";
-        public static string S_RoleHr = "HR";
-        public static string S_RoleEmployee = "Employee";
+        public const string RoleManager = "Manager";
+        public const string RoleHr = "HR";
+        public const string RoleEmployee = "Employee";
     }
 }
