@@ -36,10 +36,7 @@ namespace JWTAuthentication.Service
             user.Role = roleUser.FirstOrDefault(); 
             var userVerification = await _signInManager.CheckPasswordSignInAsync(user, userPassword, false);
 
-            //JWT/;
-
-            
-            
+            //JWT/
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var tokenDescritor = new SecurityTokenDescriptor()
@@ -53,11 +50,7 @@ namespace JWTAuthentication.Service
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
                 SecurityAlgorithms.HmacSha256Signature)
             };
-            var token = tokenHandler.CreateToken(tokenDescritor);
-
-            /*user.Token = tokenHandler.WriteToken(token);*/
-            
-
+            var accessToken = tokenHandler.CreateToken(tokenDescritor);
             var refreshToekn = tokenHandler.CreateToken(tokenDescritor);
             user.Token = tokenHandler.WriteToken(refreshToekn);
 
@@ -71,11 +64,12 @@ namespace JWTAuthentication.Service
                 user.RefreshToken = c;
 
             }
-            user.RefreshTokenExpiry = DateTime.Now.AddDays(1);
-            /*var user = await _userManager.CreateAsync(userCredentials, userCredentials.PasswordHash)*/
+            //refresh token Expiry
+            user.RefreshTokenExpiry = DateTime.Now.AddDays(5);
+
+            //saving refresh token in DB
             await _userManager.UpdateAsync(user);
-            
-            
+           
             user.PasswordHash = "";
            if(!userVerification.Succeeded) return null;
             return user;

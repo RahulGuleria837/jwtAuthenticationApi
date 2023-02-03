@@ -41,7 +41,7 @@ namespace JWTAuthentication.Controllers
                 return Ok(new { Message = "Please Register first then login!!!" });
             var userAuthorize = await _userService.AuthenticateUser(login.UserName, login.Password);
             if (userAuthorize == null) return Unauthorized();
-            return Ok(new { token = userAuthorize.Token ,userAuthorize.RefreshToken });
+            return Ok(new { accesstoken = userAuthorize.Token ,userAuthorize.RefreshToken });
         }
         [Route("Register")]
         [HttpPost]
@@ -65,11 +65,11 @@ namespace JWTAuthentication.Controllers
             if (userToken == null || !ModelState.IsValid || headerValue.FirstOrDefault() == "")
             {
                 return BadRequest();
-            }
+            } 
             var claimUserDataFromToken = _jwtManager.GetPrincipalFromExpiredToken(userToken.AccessToken);
             if (claimUserDataFromToken == null)
             {
-                return Unauthorized(new { Message = "Invalid token!!!!!!" });
+                return Unauthorized(new { Message = "your token is valid sir use this token" });
             }
             var claimUserIdentity = (ClaimsIdentity)claimUserDataFromToken.Identity;
             var claimUser = claimUserIdentity.FindFirst(ClaimTypes.Name);

@@ -78,6 +78,7 @@ namespace JWTAuthentication.Repository
                 try
                 {
                     var claimUserValue = tokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken validatedToken);
+                    if (validatedToken.ValidTo > DateTime.UtcNow) return null;
                     return claimUserValue;
                 }
                 catch
